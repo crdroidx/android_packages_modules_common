@@ -14,17 +14,7 @@
 
 package {
     default_applicable_licenses: ["Android-Apache-2.0"],
-    default_visibility: [
-        ":__subpackages__",
-        "//art/libartservice:__subpackages__",
-        "//frameworks/base:__subpackages__",
-        "//frameworks/opt:__subpackages__",
-        "//libcore:__subpackages__",
-        "//packages/modules:__subpackages__",
-        "//packages/providers/MediaProvider:__subpackages__",
-        "//system/apex/apexd:__subpackages__",
-
-    ],
+    default_visibility: ["//visibility:public"],
 }
 
 // Needed because otherwise java_defaults would resolve it in module directory.
@@ -57,6 +47,9 @@ filegroup {
     ],
 }
 
+// Defaults for jars on PRODUCT_APEX_STANDALONE_SYSTEM_SERVER_JARS. These jars
+// have a single entry point in SystemServer.java, and can be easily shrunk
+// based on a single keep rule.
 java_defaults {
     name: "standalone-system-server-module-optimize-defaults",
     optimize: {
